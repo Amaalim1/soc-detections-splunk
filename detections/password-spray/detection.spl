@@ -1,0 +1,14 @@
+``` 
+Detection: Password Spray via NTLM (Event 4776)
+ATT&CK: T1110.003 - Brute Force: Password Spraying
+```
+
+index=endpoint EventCode=4776 earliest=-1h
+| bin _time span=1m
+| stats dc(Logon_Account) as unique_accounts, values(Logon_Account) as accounts by _time
+| where unique_accounts > 3
+
+```
+Tune the threshold (currently > 3 distinct accounts per 1-minute window)
+based on your environment's normal NTLM authentication volume.
+```
