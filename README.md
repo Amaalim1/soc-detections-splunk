@@ -43,7 +43,7 @@ Both the client and the DC forward to a shared Splunk indexer:
 
 Notable lessons learned while building this pipeline (documented in
 [`docs/pipeline-troubleshooting.md`](docs/pipeline-troubleshooting.md)):
-- Sysmon's ETW **provider** ACL is separate from the channel ACL — a service
+- Sysmon's ETW **provider** ACL is separate from the channel ACL - a service
   account with correct channel read access can still fail to subscribe
   (`errorCode=5`) unless it also has provider-level access. Simplest fix:
   run the forwarder as `LocalSystem` rather than the default virtual service
