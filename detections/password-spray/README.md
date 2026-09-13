@@ -15,7 +15,7 @@ flags a burst of distinct accounts authenticating within a tight time window
 — the core fingerprint that separates a spray from normal login traffic or a
 single-account brute force.
 
-## 1. Baseline — Domain Lockout Policy
+## 1. Baseline: Domain Lockout Policy
 
 Before attacking, the domain's account lockout policy was checked. This
 matters for planning: a spray against a domain with a low lockout threshold
