@@ -21,11 +21,11 @@ something realistic to work against:
 
 - **5 departments (OUs):** IT, Finance, HR, Sales, Executives
 - **15 standard user accounts** (3 per department)
-- **`svc.itadmin`** — dedicated Domain Admin service account (kept separate
+- **`svc.itadmin`** - dedicated Domain Admin service account (kept separate
   from the built-in Administrator, matching real-world practice)
-- **`svc.backup`** — deliberately configured with Kerberos pre-authentication
+- **`svc.backup`** - deliberately configured with Kerberos pre-authentication
   disabled (AS-REP roastable)
-- **`svc.sql`** — deliberately assigned an SPN (Kerberoastable)
+- **`svc.sql`** - deliberately assigned an SPN (Kerberoastable)
 
 See [`org-builder/build-fake-org.ps1`](org-builder/build-fake-org.ps1) for the
 script used to provision all of this in one pass.
