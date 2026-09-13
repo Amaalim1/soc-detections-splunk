@@ -1,7 +1,7 @@
 # Detection: Password Spraying Against Active Directory
 
 **ATT&CK Technique:** [T1110.003 - Brute Force: Password Spraying](https://attack.mitre.org/techniques/T1110/003/)
-**Environment:** `corp.local` — Windows Server 2019 DC, 18 domain accounts
+**Environment:** `corp.local`- Windows Server 2019 DC, 18 domain accounts
 **Attacker host:** Kali Linux
 **Log source:** Windows Security event log, forwarded via Splunk UF → Splunk `endpoint` index
 
@@ -21,7 +21,7 @@ Before attacking, the domain's account lockout policy was checked. This
 matters for planning: a spray against a domain with a low lockout threshold
 risks locking out every account in one run, while an unset policy (as found
 here) means brute-force/spray attempts can run indefinitely with no
-built-in throttling — a common real-world misconfiguration.
+built-in throttling, a common real-world misconfiguration.
 
 ```powershell
 net accounts
@@ -69,7 +69,7 @@ netexec smb <dc-ip> -u users.txt -p 'Passw0rd123!' -d corp.local --continue-on-s
 ![Full spray results](screenshots/04-spray-full-results.png)
 
 **Result:** All 18 accounts authenticated successfully with the same
-password — including `svc.itadmin`, the domain's Domain Admin account
+password including `svc.itadmin`, the domain's Domain Admin account
 (flagged `Pwn3d!` by netexec).
 
 ## 4. Investigating the Telemetry
@@ -90,7 +90,7 @@ index=endpoint earliest=-45m (EventCode=4768 OR EventCode=4776 OR EventCode=4624
 | 4768 | 4 | Kerberos TGT request |
 | 4776 | 21 | NTLM credential validation |
 
-The attack authenticated primarily via **NTLM** (Event 4776), not Kerberos —
+The attack authenticated primarily via **NTLM** (Event 4776), not Kerberos
 `netexec smb` negotiates SMB authentication, which fell back to NTLM in this
 environment rather than Kerberos. This is a useful finding in its own right:
 **a detection built only around Kerberos event codes would have missed most
@@ -129,7 +129,7 @@ wrong reason).
 window at `11:25:00 AM` - every account in the domain, all at once. This is
 the spray's fingerprint.
 
-## 6. Impact — Confirming the Admin Account Was Compromised
+## 6. Impact: Confirming the Admin Account Was Compromised
 
 The account list above includes `svc.itadmin`, the domain's dedicated Domain
 Admin account. Isolating that specific account confirms it was directly
