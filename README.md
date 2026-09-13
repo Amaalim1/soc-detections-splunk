@@ -1,4 +1,4 @@
-# Home SOC Lab — Detection Engineering Portfolio
+# Home SOC Lab: Detection Engineering Portfolio
 
 A self-built Security Operations lab used to practice attacking and detecting
 real techniques against a small simulated Active Directory environment.
