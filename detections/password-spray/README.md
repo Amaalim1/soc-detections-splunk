@@ -1,6 +1,6 @@
 # Detection: Password Spraying Against Active Directory
 
-**ATT&CK Technique:** [T1110.003 — Brute Force: Password Spraying](https://attack.mitre.org/techniques/T1110/003/)
+**ATT&CK Technique:** [T1110.003 - Brute Force: Password Spraying](https://attack.mitre.org/techniques/T1110/003/)
 **Environment:** `corp.local` — Windows Server 2019 DC, 18 domain accounts
 **Attacker host:** Kali Linux
 **Log source:** Windows Security event log, forwarded via Splunk UF → Splunk `endpoint` index
@@ -29,11 +29,11 @@ net accounts
 
 ![Baseline lockout policy](screenshots/01-baseline-lockout-policy.png)
 
-**Finding:** `Lockout threshold: Never` — no account lockout policy is
+**Finding:** `Lockout threshold: Never` - no account lockout policy is
 configured on this domain, meaning credential attacks against it face no
 automatic throttling or blocking.
 
-## 2. Attack Setup — Target List
+## 2. Attack Setup - Target List
 
 An account list was built from the org's known usernames (in a real
 engagement this step would typically follow OSINT/enumeration; here the
@@ -100,7 +100,7 @@ of this attack.**
 
 Expanding a single event confirmed the relevant field for the target account
 is `Logon_Account` (not `Account_Name`, which is what a Kerberos event uses)
-— and that **NTLM events do not expose a usable source-IP field**, only a
+- and that **NTLM events do not expose a usable source-IP field**, only a
 free-text `Source Workstation` value buried in the `Message` field. This is
 a real limitation: NTLM-based detections lose the clean source attribution
 that Kerberos-based ones have.
@@ -126,7 +126,7 @@ wrong reason).
 ![Detection result](screenshots/08-splunk-detection-query-result.png)
 
 **Result:** 18 distinct accounts authenticated within a single one-minute
-window at `11:25:00 AM` — every account in the domain, all at once. This is
+window at `11:25:00 AM` - every account in the domain, all at once. This is
 the spray's fingerprint.
 
 ## 6. Impact — Confirming the Admin Account Was Compromised
